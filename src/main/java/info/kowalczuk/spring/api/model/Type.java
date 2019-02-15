@@ -1,7 +1,5 @@
 package info.kowalczuk.spring.api.model;
 
-import org.springframework.stereotype.Component;
-
 public class Type {
     private String name;
     private String desc;

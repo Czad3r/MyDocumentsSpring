@@ -28,4 +28,5 @@ public class MySearchEngine implements SearchEngine {
     public List<Document> listAll() {
         return Arrays.asList(documentRepository.getAll());
     }
+
 }

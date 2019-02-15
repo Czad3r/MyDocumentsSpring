@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="typeRepository" class="info.kowalczuk.spring.impl.data.TypeRepositoryImpl">
+        <property name="types">
+            <util:map>
+                <entry key="PDF" value-ref="typePDF"/>
+                <entry key="DOC" value-ref="typeDOC"/>
+            </util:map>
+        </property>
+    </bean>
+
+    <bean id="typePDF" class="info.kowalczuk.spring.api.model.Type" p:name="Portable Document Format" p:extension="PDF"
+          p:desc="Documents and presentations"/>
+    <bean id="typeDOC" class="info.kowalczuk.spring.api.model.Type" p:name="Document File Format" p:extension="DOC"
+          p:desc="Documents"/>
+</beans>
