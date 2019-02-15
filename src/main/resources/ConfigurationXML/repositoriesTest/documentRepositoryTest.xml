@@ -5,6 +5,8 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="typeRepositoryTest.xml"/>
+
     <bean id="dateFormat" class="java.text.SimpleDateFormat">
         <constructor-arg value="yyyy-MM-dd"/>
     </bean>
@@ -19,19 +21,14 @@
             </list>
         </property>
     </bean>
-    <bean id="doc1" class="info.kowalczuk.spring.api.model.Document" p:name="Notes" p:type-ref="typePDF"
+    <bean id="doc1" class="info.kowalczuk.spring.api.model.Document" p:name="Notes" p:type-ref="pdfType"
           p:created-ref="date2" p:modified-ref="date1"/>
-    <bean id="doc2" class="info.kowalczuk.spring.api.model.Document" p:name="Dictionary" p:type-ref="typeDOC"
+    <bean id="doc2" class="info.kowalczuk.spring.api.model.Document" p:name="Dictionary" p:type-ref="docType"
           p:created-ref="date3" p:modified-ref="date1"/>
-    <bean id="doc3" class="info.kowalczuk.spring.api.model.Document" p:name="Recipies" p:type-ref="typePDF"
+    <bean id="doc3" class="info.kowalczuk.spring.api.model.Document" p:name="Recipies" p:type-ref="pdfType"
           p:created-ref="date2" p:modified-ref="date3"/>
-    <bean id="doc4" class="info.kowalczuk.spring.api.model.Document" p:name="Spring in action" p:type-ref="typeDOC"
+    <bean id="doc4" class="info.kowalczuk.spring.api.model.Document" p:name="Spring in action" p:type-ref="docType"
           p:created-ref="date3" p:modified-ref="date4"/>
-
-    <bean id="typePDF" class="info.kowalczuk.spring.api.model.Type" p:name="Portable Document Format" p:extension="PDF"
-          p:desc="Documents and presentations"/>
-    <bean id="typeDOC" class="info.kowalczuk.spring.api.model.Type" p:name="Document File Format" p:extension="DOC"
-          p:desc="Documents"/>
 
     <bean id="date1" class="java.util.Date" factory-bean="dateFormat" factory-method="parse" c:_0="2019-01-31"/>
     <bean id="date2" class="java.util.Date" factory-bean="dateFormat" factory-method="parse" c:_0="2010-11-21"/>

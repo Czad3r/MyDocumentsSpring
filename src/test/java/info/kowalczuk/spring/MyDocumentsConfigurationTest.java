@@ -5,32 +5,32 @@ import info.kowalczuk.spring.api.model.Type;
 import info.kowalczuk.spring.api.service.SearchEngine;
 import info.kowalczuk.spring.config.AppConfiguration;
 import info.kowalczuk.spring.impl.view.Menu;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {AppConfiguration.class})
 public class MyDocumentsConfigurationTest {
 
-    private ApplicationContext context;
+    @Autowired
     private SearchEngine engine;
+    @Qualifier("docType")
+    @Autowired
     private Type docType;
-
-
-    @BeforeEach
-    public void setup() {
-        context = new AnnotationConfigApplicationContext(AppConfiguration.class);
-        engine = context.getBean(SearchEngine.class);
-        docType = context.getBean("typeDOC", Type.class);
-    }
+    @Autowired
+    private Menu menu;
 
     @Test
     public void testMenu() {
-        Menu menu = context.getBean(Menu.class);
         assertNotNull(menu);
         menu.printMenu("classpath:menu.txt");
     }
@@ -38,7 +38,6 @@ public class MyDocumentsConfigurationTest {
     @Test
     public void testConfigurationTypeNotNull() {
         assertNotNull(docType);
-        assertNotNull(context);
         assertNotNull(engine);
     }
 
