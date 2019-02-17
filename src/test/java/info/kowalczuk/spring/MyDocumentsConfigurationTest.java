@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = {AppConfiguration.class})
 public class MyDocumentsConfigurationTest {
 
+    @Qualifier("engineProxy")
     @Autowired
     private SearchEngine engine;
     @Qualifier("docType")
@@ -32,7 +33,9 @@ public class MyDocumentsConfigurationTest {
     @Test
     public void testMenu() {
         assertNotNull(menu);
-        menu.printMenu("classpath:menu.txt");
+        assertNotEquals(new String(),
+                menu.printMenu("classpath:menu.txt"));
+
     }
 
     @Test
@@ -45,7 +48,7 @@ public class MyDocumentsConfigurationTest {
     public void testConfigurationFindByType() {
         List<Document> documents = engine.findByType(docType);
         assertNotNull(documents);
-        assertTrue(documents.size() == 2);
+        assertEquals(2, documents.size());
         assertEquals(docType.getName(), documents.get(0).getType().getName());
         assertEquals(docType.getDesc(), documents.get(1).getType().getDesc());
         assertEquals(docType.getExtension(), documents.get(0).getType().getExtension());
@@ -57,4 +60,13 @@ public class MyDocumentsConfigurationTest {
         assertNotNull(documents);
         assertTrue(documents.size() == 4);
     }
+
+    @Test
+    public void testConfigurationFindByLocation() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            engine.findByLocation("/jakaś/ścieżka/");
+        });
+    }
+
 }
+

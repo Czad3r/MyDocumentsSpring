@@ -7,7 +7,8 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ComponentScan(basePackages = "info.kowalczuk.spring")
-@ImportResource({"classpath:/ConfigurationXML/repositoriesTest/documentRepositoryTest.xml "})
+@ImportResource({"classpath:/ConfigurationXML/repositoriesTest/documentRepositoryTest.xml",
+        "classpath:/ConfigurationXML/aop-context/mydocuments-aop-context.xml"})
 
 public class AppConfiguration {
 

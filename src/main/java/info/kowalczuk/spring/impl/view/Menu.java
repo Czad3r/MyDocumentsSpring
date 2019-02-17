@@ -13,17 +13,19 @@ public class Menu {
     @Autowired
     private ResourceLoader menuFile;
 
-    public void printMenu(String location) {
+    public String printMenu(String location) {
+        String result="";
         try (InputStream stream =
                      getMenuFile().getResource(location).getInputStream()) {
             Scanner scanner = new Scanner(stream);
             while (scanner.hasNext()) {
-                System.out.println(scanner.nextLine());
+                result+=scanner.nextLine();
             }
             scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return result;
     }
 
     public ResourceLoader getMenuFile() {
