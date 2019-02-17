@@ -1,34 +1,29 @@
 package info.kowalczuk.spring.service;
 
 import info.kowalczuk.spring.api.service.Login;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = {"classpath:ConfigurationXML/loginTest/loginTest.xml"})
+@ActiveProfiles("dev")
 public class LoginTest {
     private static final String EMAIL = "test@mydocuments.com";
     private static final String PASS = "test";
-    private ClassPathXmlApplicationContext context;
-    @BeforeEach
-    public void setup(){
-        context = new ClassPathXmlApplicationContext("classpath:ConfigurationXML/loginTest/loginTest.xml");
-    }
+    @Autowired
+    private Login login;
+
     @Test
     public void testLogin() {
-        Login login = context.getBean(Login.class);
         assertNotNull(login);
         assertTrue(login.isAuthorized(EMAIL, PASS));
-    }
-    @Test
-    public void testLogin2() {
-        context=new ClassPathXmlApplicationContext("classpath:ConfigurationXML/loginTest/loginTest2.xml");
-        Login login = context.getBean(Login.class);
-        assertNotNull(login);
-        assertFalse(login.isAuthorized(EMAIL,PASS));
     }
 }
 

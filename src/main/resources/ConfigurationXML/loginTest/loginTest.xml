@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="environmentProperties"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:userProperties/dev.properties"/>
-    </bean>
-    <bean id="login" class="info.kowalczuk.spring.impl.service.LoginImpl">
-        <property name="username" value="${user.email}"/>
-        <property name="password" value="${user.password}"/>
-    </bean>
+    <beans profile="dev">
+        <bean class="info.kowalczuk.spring.impl.service.LoginImpl" p:username="test@mydocuments.com" p:password="test"/>
+    </beans>
+    <beans profile="qa">
+        <bean class="info.kowalczuk.spring.impl.service.LoginImpl" p:username="asda@asda.com" p:password="123qHaas"/>
+    </beans>
 </beans>
