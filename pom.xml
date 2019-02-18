@@ -62,8 +62,11 @@
             <version>1.3.2</version>
         </dependency>
 
+<<<<<<< HEAD
 >>>>>>> Added aop logging with xml config.
 
+=======
+>>>>>>> Added fundamentals for jdbc
     </dependencies>
 
     <repositories>
