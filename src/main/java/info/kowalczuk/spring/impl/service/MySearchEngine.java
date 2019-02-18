@@ -26,7 +26,7 @@ public class MySearchEngine implements SearchEngine {
     }
 
     public List<Document> listAll() {
-        return Arrays.asList(documentRepository.getAll());
+        return documentRepository.getAll();
     }
 
     public List<Document> findByLocation(String location) {

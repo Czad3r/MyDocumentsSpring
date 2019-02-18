@@ -12,16 +12,15 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {AppConfiguration.class})
 public class MyDocumentsJDBCTest {
     @Autowired
     private SearchEngine engine;
-    private Type webType = new Type("WEB",".url");
+    private Type webType = new Type("WEB", ".url");
+
     @Test
     public void testUsingSpringJDBC() {
         List<Document> documents = engine.listAll();
@@ -30,7 +29,7 @@ public class MyDocumentsJDBCTest {
         documents = engine.findByType(webType);
         assertNotNull(documents);
         assertTrue(documents.size() == 1);
-        assertEquals(webType.getName(),documents.get(0).getType().getName());
-        assertEquals(webType.getExtension(),documents.get(0).getType().getExtension());
+        assertEquals(webType.getName(), documents.get(0).getType().getName());
+        assertEquals(webType.getExtension(), documents.get(0).getType().getExtension());
     }
 }

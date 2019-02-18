@@ -11,8 +11,17 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    <!--<bean id="documentRepository" class="info.kowalczuk.spring.impl.data.DocumentRepositoryImpl"
+    <bean id="documentRepository" class="info.kowalczuk.spring.impl.data.DocumentRepositoryImpl"
           init-method="initialize">
         <property name="dataSource" ref="dataSource"/>
-    </bean>-->
+        <property name="schema" value="DataSource/schema.sql"/>
+        <property name="data" value="DataSource/data.sql"/>
+        <property name="queryAll">
+            <value>
+                select d.documentId, d.name, d.location, d.description as doc_desc, d.typeId, d.created,
+                d.modified, t.name as type_name, t.description as type_desc, t.extension from documents
+                d join types t on d.typeId = t.typeId
+            </value>
+        </property>
+    </bean>
 </beans>
