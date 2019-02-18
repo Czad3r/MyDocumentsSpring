@@ -21,5 +21,6 @@ public class AfterLoggingModule {
             log.info(() -> "@@@@(AFTER) Przekazany argument:" + arg);
         ;
 
+
     }
 }

@@ -8,7 +8,6 @@ import info.kowalczuk.spring.impl.view.Menu;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -23,9 +22,7 @@ public class MyDocumentsConfigurationTest {
 
     @Autowired
     private SearchEngine engine;
-    @Qualifier("docType")
-    @Autowired
-    private Type docType;
+    private Type docType = new Type("PDF", ".pdf");
     @Autowired
     private Menu menu;
 
@@ -34,7 +31,6 @@ public class MyDocumentsConfigurationTest {
         assertNotNull(menu);
         assertNotEquals(new String(),
                 menu.printMenu("classpath:menu.txt"));
-
     }
 
     @Test
@@ -49,7 +45,7 @@ public class MyDocumentsConfigurationTest {
         assertNotNull(documents);
         assertEquals(2, documents.size());
         assertEquals(docType.getName(), documents.get(0).getType().getName());
-        assertEquals(docType.getDesc(), documents.get(1).getType().getDesc());
+        assertNotEquals(docType.getDesc(), documents.get(1).getType().getDesc());
         assertEquals(docType.getExtension(), documents.get(0).getType().getExtension());
     }
 
