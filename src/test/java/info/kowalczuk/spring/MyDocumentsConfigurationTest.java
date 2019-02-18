@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ContextConfiguration(classes = {AppConfiguration.class})
 public class MyDocumentsConfigurationTest {
 
-    @Qualifier("engineProxy")
     @Autowired
     private SearchEngine engine;
     @Qualifier("docType")
