@@ -1,5 +1,6 @@
 package info.kowalczuk.spring.data;
 
+import info.kowalczuk.spring.api.data.DocumentRepository;
 import info.kowalczuk.spring.api.model.Document;
 import info.kowalczuk.spring.api.model.Type;
 import info.kowalczuk.spring.api.service.SearchEngine;
@@ -20,6 +21,9 @@ public class MyDocumentsJDBCTest {
     @Autowired
     private SearchEngine engine;
     private Type webType = new Type("WEB", ".url");
+
+    @Autowired
+    private DocumentRepository repo;
 
     @Test
     public void testUsingSpringJDBC() {
