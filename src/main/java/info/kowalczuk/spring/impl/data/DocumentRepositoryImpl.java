@@ -13,20 +13,17 @@ import java.util.List;
 @Repository("documentRepository")
 public class DocumentRepositoryImpl implements DocumentRepository {
 
-    private JdbcTemplate jdbcTemplate;
     private static final String queryAll = "select d.documentId, d.name, d.location, d.description as doc_desc, d.typeId, d.created," +
             " d.modified, t.name as type_name, t.description as type_desc, t.extension from documents" +
             " d join types t on d.typeId = t.typeId";
-
+    @Autowired
     private DataSource dataSource;
 
-    @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(this.dataSource);
     }
 
     public List<Document> getAll() {
-        return jdbcTemplate.query(queryAll, new DocumentRowMapper());
+        return new JdbcTemplate(this.dataSource).query(queryAll, new DocumentRowMapper());
     }
 }
