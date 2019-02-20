@@ -3,12 +3,28 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <context:component-scan base-package="info.kowalczuk.spring.impl.data"/>
-    <jdbc:embedded-database id="dataSource" >
+    <jdbc:embedded-database id="dataSource">
         <jdbc:script location="classpath:DataSource/schema.sql"/>
         <jdbc:script location="classpath:DataSource/data.sql"/>
     </jdbc:embedded-database>
+    <bean id="query" class="java.lang.String" c:value="select d.documentId, d.name, d.location, d.description as doc_desc, d.typeId, d.created,
+     d.modified, t.name as type_name, t.description as type_desc, t.extension from documents
+     d join types t on d.typeId = t.typeId"/>
+    <bean id="insert" class="java.lang.String" c:value="insert into documents
+    (documentId,name,location,description, typeId, created, modified)values (?,?,?,?,?,?,?)"/>
+    <bean id="find" class="java.lang.String" c:value="select d.documentId, d.name, d.location, d.description as doc_desc,
+ d.typeId, d.created, d.modified,
+ t.name as type_name, t.description as type_desc, t.extension from
+ documents d
+ join types t
+ on d.typeId = t.typeId
+ where d.documentId = ?"/>
+    <bean id="update" class="java.lang.String" c:value="update documents set name = ?, location = ?, description = ?,
+     typeId = ?, modified = ? where documentId = ?"/>
+
 </beans>
