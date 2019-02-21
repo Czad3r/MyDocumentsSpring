@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="info.kowalczuk.spring.impl.component"/>
+    <!-- RabbitMQ -->
+    <rabbit:connection-factory id="rabbitConnectionFactory" host="localhost"/>
+    <rabbit:admin connection-factory="rabbitConnectionFactory"/>
+    <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
+                     routing-key="mydocumentsQueue"/>
+    <rabbit:queue name="mydocumentsQueue"/>
+    <rabbit:listener-container connection-factory="rabbitConnectionFactory">
+        <rabbit:listener ref="rabbitmqConsumer" queues="mydocumentsQueue"/>
+    </rabbit:listener-container>
+</beans>

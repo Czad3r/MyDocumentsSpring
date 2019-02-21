@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface DocumentRepository {
     public List<Document> getAll();
+    public Document findById(String id);
 }

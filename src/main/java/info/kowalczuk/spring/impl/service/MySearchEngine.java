@@ -32,6 +32,9 @@ public class MySearchEngine implements SearchEngine {
     public List<Document> findByLocation(String location) {
         throw new UnsupportedOperationException("Metoda findByLocation jest jeszcze niezaimplementowana.");
     }
+    public Document findById(String id){
+        return documentRepository.findById(id);
+    }
 
     public DocumentRepository getDocumentRepository() {
         return documentRepository;
