@@ -5,5 +5,12 @@ import info.kowalczuk.spring.api.model.Document;
 import java.util.List;
 
 public interface DocumentRepository {
-    public List<Document> getAll();
+    List<Document> getAll();
+
+    Document save(String id, Document document);
+
+    Document removeById(String id);
+
+    Document findById(String id);
+
 }
