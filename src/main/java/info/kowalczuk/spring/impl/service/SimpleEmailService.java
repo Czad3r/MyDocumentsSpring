@@ -4,6 +4,7 @@ import info.kowalczuk.spring.api.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,11 @@ public class SimpleEmailService implements EmailService {
     private MailSender mailSender;
 
     public void send(String from, String to, String subject, String message) {
+        sendEmail(from, to, subject, message);
+    }
+
+    @Async
+    public void sendAsync(String from, String to, String subject, String message) {
         sendEmail(from, to, subject, message);
     }
 
